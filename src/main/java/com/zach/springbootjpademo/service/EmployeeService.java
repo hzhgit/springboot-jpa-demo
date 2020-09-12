@@ -5,6 +5,8 @@ import com.zach.springbootjpademo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmployeeService {
     @Autowired
@@ -15,6 +17,20 @@ public class EmployeeService {
     }
 
     public void delete(Integer id) {
-        employeeDao.deleteById(id);
+        if(employeeDao.findById(id).isPresent()) {
+            employeeDao.deleteById(id);
+        }
+    }
+
+    public Employee update(Integer id,Employee employee) {
+        if(employeeDao.findById(id).isPresent()){
+            employee.setId(id);
+            return employeeDao.save(employee);
+        }
+        return null;
+    }
+
+    public List<Employee> getAll() {
+        return employeeDao.findAll();
     }
 }

@@ -5,6 +5,8 @@ import com.zach.springbootjpademo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -21,6 +23,16 @@ public class EmployeeController {
     public String del(@PathVariable Integer id){
         employeeService.delete(id);
         return "delete success!";
+    }
+
+    @PutMapping("/{id}")
+    public Employee update(@PathVariable Integer id ,@RequestBody Employee employee){
+        return employeeService.update(id,employee);
+    }
+
+    @GetMapping
+    public List<Employee> getAll(){
+        return employeeService.getAll();
     }
 }
 
