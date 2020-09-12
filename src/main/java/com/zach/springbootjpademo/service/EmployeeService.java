@@ -3,6 +3,8 @@ package com.zach.springbootjpademo.service;
 import com.zach.springbootjpademo.dao.EmployeeDao;
 import com.zach.springbootjpademo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,5 +34,9 @@ public class EmployeeService {
 
     public List<Employee> getAll() {
         return employeeDao.findAll();
+    }
+
+    public Page<Employee> getAllByPaging(Integer page, Integer size) {
+        return employeeDao.findAll(PageRequest.of(page,size));
     }
 }
