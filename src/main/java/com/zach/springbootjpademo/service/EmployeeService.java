@@ -13,4 +13,8 @@ public class EmployeeService {
     public Employee saveEmp(Employee employee) {
         return employeeDao.save(employee);
     }
+
+    public void delete(Integer id) {
+        employeeDao.deleteById(id);
+    }
 }
